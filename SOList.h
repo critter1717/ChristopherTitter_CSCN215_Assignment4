@@ -27,6 +27,15 @@ public:
 	// Print the list
 	void printlist() const override { list.print(); }       // Print entire list
 	void printlist(int n) const override;                   // Print first n nodes
+	void reorderCount(const E& it)
+	{
+		int index = list.currPos();
+		it.incrementCount(); //reorder the list based on the count of the element
+		while (index > 0 && list.getValueAt(index - 1).getCount() < it.getCount()) {
+			list.swap(index, index - 1);
+			index--;
+		}
+	}
 	
 };
 
