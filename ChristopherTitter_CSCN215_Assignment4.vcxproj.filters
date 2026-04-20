@@ -30,7 +30,13 @@
     <ClInclude Include="SelfOrderedListADT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SOList.h">
+    <ClInclude Include="SOListCount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOListMTF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOListTranspose.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

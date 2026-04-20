@@ -132,7 +132,9 @@
     <ClInclude Include="list.h" />
     <ClInclude Include="llist.h" />
     <ClInclude Include="SelfOrderedListADT.h" />
-    <ClInclude Include="SOList.h" />
+    <ClInclude Include="SOListCount.h" />
+    <ClInclude Include="SOListMTF.h" />
+    <ClInclude Include="SOListTranspose.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
