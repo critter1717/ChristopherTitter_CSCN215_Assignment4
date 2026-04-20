@@ -40,7 +40,13 @@ public:
 	int getCompares() const override { return compares; }   // Returns the number of accumulated compares
 	int size() const override { return list.length(); }     // Returns the size of the list
 	// Print the list
-	void printlist() const override { list.print(); }       // Print entire list
+	void printlist() const override 
+	{ 
+		std::cout << "Transpose Heuristic: " << std::endl;
+		std::cout << "Size of list: " << size() << std::endl;
+		std::cout << "Number of compares: " << getCompares() << std::endl;
+		list.print();
+	}       // Print entire list
 	void printlist(int n) const override;                   // Print first n nodes
 	void reorder(const E& it)
 	{

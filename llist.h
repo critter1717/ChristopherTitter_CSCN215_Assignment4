@@ -42,7 +42,20 @@ private:
 public:
   LList() { init(); }    // Constructor
   ~LList() { removeall(); }                   // Destructor
-  void print() const;                // Print list contents
+  void print() const
+  {
+      for (int i = 0; i < cnt; i++)
+      {
+		  std::cout << getValueAt(i) << "--" << curr->getCount() << std::endl;
+      }
+  }// Print list contents
+  void print(int n) const
+  {
+      for (int i = 0; i < n && i < cnt; i++)
+      {
+          std::cout << getValueAt(i) << "--" << curr->getCount() << std::endl;
+      }
+  } // Print first n elements
   void clear() { removeall(); init(); }       // Clear list
 
   // Insert "it" at current position
