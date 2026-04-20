@@ -136,6 +136,9 @@
     <ClInclude Include="SOListMTF.h" />
     <ClInclude Include="SOListTranspose.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Test.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
