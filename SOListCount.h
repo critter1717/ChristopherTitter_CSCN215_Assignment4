@@ -17,14 +17,15 @@ public:
 	// other members of the list. Returns true if 'it' is found.
 	bool search(const E& it)
 	{
-		compares = 0; // Reset compares for this search
 		for (int i = 0; i < list.length(); i++) {
 			compares++; // Increment compares for each comparison
 			if (list.getValueAt(i) == it) {
 				list.moveToPos(i); // Move to the position of the found element
+				reorder(it); // Reorder the list using the count heuristic
 				return true; // 'it' is found
 			}
 		}
+		addIt(it); // If 'it' is not found, add it to the list
 		return false; // 'it' is not found
 	}
 	// Called by find if 'it' is not in the list. Adds the new 'it' to the list
@@ -32,7 +33,10 @@ public:
 	// unique values and when you want to load the list in the order 'it' is 
 	// read without your re-order method being called (or the number of compares
 	// being incremented.
-	void addIt(const E& it) override;  // Add new 'it' to the list
+	void addIt(const E& it)
+	{
+		list.append(it); // Add new 'it' to the end of the list
+	}
 	int getCompares() const override { return compares; }   // Returns the number of accumulated compares
 	int size() const override { return list.length(); }     // Returns the size of the list
 	// Print the list
