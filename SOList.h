@@ -36,6 +36,16 @@ public:
 			index--;
 		}
 	}
+	void reorderMoveToFront(const E& it)
+	{
+		it.incrementCount(); //reorder the list by moving the element to the front
+		int index = list.currPos();
+		while (index > 0) {
+			list.swap(index, index - 1);
+			index--;
+		}
+	}
 	
+
 };
 
