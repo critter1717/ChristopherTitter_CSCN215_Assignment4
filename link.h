@@ -11,6 +11,9 @@
 // Singly linked list node
 template <class E> 
 class Link {
+private:
+	int count;  // Count of accesses for this node
+
 public:
   E element;      // Value for this node
   Link *next;        // Pointer to next node in list
@@ -18,4 +21,7 @@ public:
   Link(const E& elemval, Link* nextval =NULL)
     { element = elemval;  next = nextval; }
   Link(Link* nextval =NULL) { next = nextval; }
+  int getCount() const { return count; }  // Get the count of accesses
+  void incrementCount() { count++; }       // Increment the count of accesses
+
 };
