@@ -3,6 +3,7 @@
 #include "SOListCount.h"
 #include "SOListMTF.h"
 #include "SOListTranspose.h"
+#include <fstream>
 
 int main() {
 	SOListCount<char> countList;
@@ -64,5 +65,28 @@ int main() {
 	countList.printlist();
 	mtfList.printlist();
 	transposeList.printlist();
+
+	// Test 2 data
+	SOListCount<string> countList2;
+	SOListMTF<string> mtfList2;
+	SOListTranspose<string> transposeList2;
+	// Open test.txt file word by word and read data into the lists
+	std::ifstream inputFile("test.txt");
+	if (inputFile.is_open()) {
+		std::string word;
+		while (inputFile >> word) {
+				countList2.search(word);
+				mtfList2.search(word);
+				transposeList2.search(word);
+		}
+		inputFile.close();
+	} else {
+		std::cerr << "Unable to open file test.txt" << std::endl;
+	}
+	// Print the results for test 2
+	countList2.printlist(10); // Print first 10 nodes
+	mtfList2.printlist(10);   // Print first 10 nodes
+	transposeList2.printlist(10); // Print first 10 nodes
+
 	return 0;
 }
