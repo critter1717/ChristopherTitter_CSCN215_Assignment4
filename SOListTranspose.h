@@ -47,7 +47,13 @@ public:
 		std::cout << "Number of compares: " << getCompares() << std::endl;
 		list.print();
 	}       // Print entire list
-	void printlist(int n) const override;                   // Print first n nodes
+	void printlist(int n) const override
+	{
+		std::cout << "Transpose Heuristic: " << std::endl;
+		std::cout << "Size of list: " << size() << std::endl;
+		std::cout << "Number of compares: " << getCompares() << std::endl;
+		list.print(n);
+	}// Print first n nodes
 	void reorder(const E& it)
 	{
 		it.incrementCount(); //reorder the list by transposing the element with its predecessor
