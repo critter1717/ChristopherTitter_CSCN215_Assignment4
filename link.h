@@ -19,9 +19,10 @@ public:
   Link *next;        // Pointer to next node in list
   // Constructors
   Link(const E& elemval, Link* nextval =NULL)
-    { element = elemval;  next = nextval; }
-  Link(Link* nextval =NULL) { next = nextval; }
+    { element = elemval;  next = nextval; count = 0; }
+  Link(Link* nextval =NULL) { next = nextval; count = 0; }
   int getCount() const { return count; }  // Get the count of accesses
   void incrementCount() { count++; }       // Increment the count of accesses
+  void setCount(int c) { count = c; }      // Set the count of accesses
 
 };

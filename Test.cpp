@@ -5,9 +5,9 @@
 #include "SOListTranspose.h"
 
 int main() {
-	SOListCount<int> countList;
-	SOListMTF<int> mtfList;
-	SOListTranspose<int> transposeList;
+	SOListCount<char> countList;
+	SOListMTF<char> mtfList;
+	SOListTranspose<char> transposeList;
 	// Test 1 data
 	char testData[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
 	for(int i = 0; i < 8; i++) {
@@ -18,7 +18,6 @@ int main() {
 	// Search for elements in the lists using count heuristic
 	countList.search('F');
 	countList.search('D');
-	countList.search('F');
 	countList.search('F');
 	countList.search('G');
 	countList.search('E');
@@ -35,7 +34,6 @@ int main() {
 	mtfList.search('F');
 	mtfList.search('D');
 	mtfList.search('F');
-	mtfList.search('F');
 	mtfList.search('G');
 	mtfList.search('E');
 	mtfList.search('G');
@@ -50,7 +48,6 @@ int main() {
 	// Search for elements in the lists using transpose
 	transposeList.search('F');
 	transposeList.search('D');
-	transposeList.search('F');
 	transposeList.search('F');
 	transposeList.search('G');
 	transposeList.search('E');

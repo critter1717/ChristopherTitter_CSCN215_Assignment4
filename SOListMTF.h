@@ -15,17 +15,20 @@ public:
 	// heuristic used for ordering the list: count, move-to-front, or transpose.
 	// Increments the compare instance variable every time it compares 'it' to
 	// other members of the list. Returns true if 'it' is found.
-	bool search(const E& it)
+    bool search(const E& it) override
 	{
+		list.moveToStart(); // Start from the beginning of the list
 		for (int i = 0; i < list.length(); i++) {
 			compares++; // Increment compares for each comparison
-			if (list.getValueAt(i) == it) {
+			if (list.getValue() == it) {
 				list.moveToPos(i); // Move to the position of the found element
-				reorder(it); // Reorder the list using the move-to-front heuristic
+				reorder(i); // Reorder the list using the move-to-front heuristic
 				return true; // 'it' is found
 			}
+			list.next(); // Move to the next element in the list
 		}
 		addIt(it); // If 'it' is not found, add it to the list
+		list.moveToFrontAt(list.length() - 1); // Move the newly added element to the front of the list
 		return false; // 'it' is not found
 	}
 	// Called by find if 'it' is not in the list. Adds the new 'it' to the list
@@ -54,13 +57,14 @@ public:
 		std::cout << "Number of compares: " << getCompares() << std::endl;
 		list.print(n);
 	}// Print first n nodes
-	void reorder(const E& it)
+    void reorder(int index)
 	{
-		it.incrementCount(); //reorder the list by moving the element to the front
-		int index = list.currPos();
-		while (index > 0) {
-			list.swap(index, index - 1);
-			index--;
+        if (index >= 0 && index < list.length()) {
+			Link<E>* node = list.getLinkAt(index);
+			if (node) {
+				node->incrementCount();
+				list.moveToFrontAt(index);
+			}
 		}
 	}
 

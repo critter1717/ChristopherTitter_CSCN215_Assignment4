@@ -44,16 +44,18 @@ public:
   ~LList() { removeall(); }                   // Destructor
   void print() const
   {
-      for (int i = 0; i < cnt; i++)
-      {
-		  std::cout << getValueAt(i) << "--" << curr->getCount() << std::endl;
+      Link<E>* temp = head->next;
+      for (int i = 0; i < cnt && temp != NULL; i++) {
+          std::cout << temp->element << "--" << temp->getCount() << std::endl;
+          temp = temp->next;
       }
   }// Print list contents
   void print(int n) const
   {
-      for (int i = 0; i < n && i < cnt; i++)
-      {
-          std::cout << getValueAt(i) << "--" << curr->getCount() << std::endl;
+      Link<E>* temp = head->next;
+      for (int i = 0; i < n && i < cnt && temp != NULL; i++) {
+          std::cout << temp->element << "--" << temp->getCount() << std::endl;
+          temp = temp->next;
       }
   } // Print first n elements
   void clear() { removeall(); init(); }       // Clear list
@@ -122,5 +124,63 @@ public:
   const E& getValue() const { // Return current element
     Assert(curr->next != NULL, "No value");
     return curr->next->element;
+  }
+
+  // Return pointer to the link node at position pos (0-based)
+  Link<E>* getLinkAt(int pos) {
+    Assert(pos >= 0 && pos < cnt, "Position out of range");
+    Link<E>* temp = head->next;
+    for (int i = 0; i < pos; i++) temp = temp->next;
+    return temp;
+  }
+
+  // Return reference to link at position pos
+  Link<E>& getValueAt(int pos) {
+    return *getLinkAt(pos);
+  }
+
+  // Swap elements (and counts) at positions i and j
+  void swap(int i, int j) {
+    Assert(i >= 0 && i < cnt && j >= 0 && j < cnt, "Position out of range");
+    if (i == j) return;
+    Link<E>* a = getLinkAt(i);
+    Link<E>* b = getLinkAt(j);
+    // Swap element values
+    std::swap(a->element, b->element);
+    // Swap counts using the new setter
+    int ca = a->getCount();
+    int cb = b->getCount();
+    a->setCount(cb);
+    b->setCount(ca);
+  }
+
+  // Move node at position pos to front (position 0). Uses pointer adjustments; O(pos)
+  void moveToFrontAt(int pos) {
+    Assert(pos >= 0 && pos < cnt, "Position out of range");
+    if (pos == 0) return;
+    Link<E>* prev = head;
+    for (int i = 0; i < pos; i++) prev = prev->next; // prev points to node before target
+    Link<E>* node = prev->next; // target node
+    prev->next = node->next; // remove node
+    if (node == tail) tail = prev; // update tail if needed
+    // insert after head
+    node->next = head->next;
+    head->next = node;
+  }
+
+  // Transpose node at position pos with its predecessor (pos>0). Uses pointer adjustments; O(pos)
+  void transposeAt(int pos) {
+    Assert(pos > 0 && pos < cnt, "Position out of range");
+    Link<E>* prevPrev = head;
+    for (int i = 0; i < pos - 1; i++) prevPrev = prevPrev->next; // node before the predecessor
+    Link<E>* a = prevPrev->next; // predecessor (pos-1)
+    Link<E>* b = a->next;        // node at pos
+    a->next = b->next;
+    b->next = a;
+    prevPrev->next = b;
+    // Update tail if needed
+    if (b == tail) {
+      tail = a;
+    }
   }
 };
