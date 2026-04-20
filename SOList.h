@@ -45,7 +45,14 @@ public:
 			index--;
 		}
 	}
-	
+	void reorderTranspose(const E& it)
+	{
+		it.incrementCount(); //reorder the list by transposing the element with its predecessor
+		int index = list.currPos();
+		if (index > 0) {
+			list.swap(index, index - 1);
+		}
+	}
 
 };
 
